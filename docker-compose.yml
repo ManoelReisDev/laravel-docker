@@ -11,6 +11,8 @@ services:
       - composer-cache:/tmp/composer-cache
     environment:
       COMPOSER_CACHE_DIR: /tmp/composer-cache
+      HOME: /tmp
+      XDG_CONFIG_HOME: /tmp/.config
     depends_on:
       mysql:
         condition: service_healthy
