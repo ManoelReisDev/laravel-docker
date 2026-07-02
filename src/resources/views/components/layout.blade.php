@@ -6,9 +6,9 @@
     <title>{{ isset($title) ? $title . ' - Chirper' : 'Chirper' }}</title>
     <link rel="preconnect" href="<https://fonts.bunny.net>">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen flex flex-col bg-base-200 font-sans">
     <nav class="navbar bg-base-100">
@@ -17,7 +17,7 @@
         </div>
         <div class="navbar-end gap-2">
             <a href="#" class="btn btn-ghost btn-sm">Sign In</a>
-            <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
+            <a href="#" class="btn btn-ghost btn-sm">Sign Up</a>
         </div>
     </nav>
 

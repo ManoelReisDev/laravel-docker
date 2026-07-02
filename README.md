@@ -1,12 +1,11 @@
 # Laravel 13 com Docker
 
-Ambiente local para estudo de Laravel 13 com PHP, Node.js, MySQL e Nginx, isolado por containers e sem instalar essas dependências no host.
+Ambiente local para estudo de Laravel 13 com PHP, MySQL e Nginx, isolado por containers e sem instalar essas dependências no host.
 
 ## Estrutura
 
 - `docker-compose.yml`: orquestra os containers.
 - `docker/php/Dockerfile`: imagem do PHP-FPM com Composer e extensões do Laravel.
-- `docker/node/Dockerfile`: imagem do Node.js LTS para Vite, npm e assets.
 - `docker/nginx/default.conf`: Nginx servindo a pasta `public` do Laravel.
 - `src/.env.example`: base de variáveis do Laravel.
 - `src/.env`: arquivo real usado pelo Laravel, criado a partir do exemplo.
@@ -15,19 +14,18 @@ Ambiente local para estudo de Laravel 13 com PHP, Node.js, MySQL e Nginx, isolad
 ## Função de cada container
 
 - `php`: executa o Laravel, roda `artisan`, `composer` e atende requisições PHP via PHP-FPM.
-- `node`: executa `npm`, `npm run dev` e o pipeline de front-end do Laravel.
 - `mysql`: guarda os dados do banco com persistência em volume nomeado.
 - `nginx`: expõe a aplicação no navegador e repassa requisições PHP para o container `php`.
 
 ## Por que separar os containers
 
-Separar PHP, Node, MySQL e Nginx evita instalar dependências no host, reduz conflito de versões e deixa cada parte do ambiente mais fácil de atualizar, reiniciar e entender.
+Separar PHP, MySQL e Nginx evita instalar dependências no host, reduz conflito de versões e deixa cada parte do ambiente mais fácil de atualizar, reiniciar e entender.
 
 ## Primeiro uso após clonar
 
 1. Copie o arquivo de exemplo do Laravel para `src/.env`.
 2. Suba os containers.
-3. Instale as dependências PHP e Node dentro dos containers.
+3. Instale as dependências PHP dentro dos containers.
 4. Gere a `APP_KEY` se ela ainda estiver vazia.
 
 ```bash
@@ -35,7 +33,6 @@ cp src/.env.example src/.env
 docker compose up -d --build
 docker compose exec php composer install
 docker compose exec php php artisan key:generate
-docker compose exec node npm install
 ```
 
 ## Comandos do dia a dia
@@ -62,18 +59,6 @@ Instalar dependências PHP:
 
 ```bash
 docker compose exec php composer install
-```
-
-Instalar dependências Node:
-
-```bash
-docker compose exec node npm install
-```
-
-Rodar o Vite em modo desenvolvimento:
-
-```bash
-docker compose exec node npm run dev
 ```
 
 Executar migrations:
@@ -122,11 +107,10 @@ Não deve ir para o Git:
 
 - `src/.env`
 - `src/vendor/`
-- `src/node_modules/`
 - `src/storage/`
 - `src/bootstrap/cache/`
 - dados do banco do volume `mysql-data`
 
 ## Observação sobre `php artisan serve`
 
-Ele é útil só como alternativa de estudo. No setup principal, o acesso normal deve ser feito pelo Nginx.# laravel-node-docker-template
+Ele é útil só como alternativa de estudo. No setup principal, o acesso normal deve ser feito pelo Nginx.
